@@ -1,0 +1,15 @@
+D:\Tesco\CQRSJourney\CarCRUD\bin\Debug\CarRentals.dll.config
+D:\Tesco\CQRSJourney\CarCRUD\bin\Debug\CarRentals.dll
+D:\Tesco\CQRSJourney\CarCRUD\bin\Debug\CarRentals.pdb
+D:\Tesco\CQRSJourney\CarCRUD\bin\Debug\EntityFramework.dll
+D:\Tesco\CQRSJourney\CarCRUD\bin\Debug\Infrastructure.dll
+D:\Tesco\CQRSJourney\CarCRUD\bin\Debug\Microsoft.WindowsAzure.Configuration.dll
+D:\Tesco\CQRSJourney\CarCRUD\bin\Debug\Newtonsoft.Json.dll
+D:\Tesco\CQRSJourney\CarCRUD\bin\Debug\Infrastructure.pdb
+D:\Tesco\CQRSJourney\CarCRUD\bin\Debug\Infrastructure.xml
+D:\Tesco\CQRSJourney\CarCRUD\bin\Debug\EntityFramework.xml
+D:\Tesco\CQRSJourney\CarCRUD\bin\Debug\Microsoft.WindowsAzure.Configuration.xml
+D:\Tesco\CQRSJourney\CarCRUD\bin\Debug\Newtonsoft.Json.xml
+D:\Tesco\CQRSJourney\CarCRUD\obj\Debug\CarRentals.csprojResolveAssemblyReference.cache
+D:\Tesco\CQRSJourney\CarCRUD\obj\Debug\CarRentals.dll
+D:\Tesco\CQRSJourney\CarCRUD\obj\Debug\CarRentals.pdb

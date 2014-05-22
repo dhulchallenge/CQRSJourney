@@ -1,0 +1,7 @@
+D:\Tesco\CQRSJourney\Common\bin\Debug\Common.dll
+D:\Tesco\CQRSJourney\Common\bin\Debug\Common.pdb
+D:\Tesco\CQRSJourney\Common\bin\Debug\Microsoft.WindowsAzure.Configuration.dll
+D:\Tesco\CQRSJourney\Common\bin\Debug\Microsoft.WindowsAzure.Configuration.xml
+D:\Tesco\CQRSJourney\Common\obj\Debug\Common.dll
+D:\Tesco\CQRSJourney\Common\obj\Debug\Common.pdb
+D:\Tesco\CQRSJourney\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache

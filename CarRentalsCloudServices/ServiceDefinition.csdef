@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceDefinition name="CarRentalsCloudServices" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2014-01.2.3">
+  <WebRole name="CarRentalsAPI" vmsize="Small">
+    <Sites>
+      <Site name="Web">
+        <Bindings>
+          <Binding name="Endpoint1" endpointName="Endpoint1" />
+        </Bindings>
+      </Site>
+    </Sites>
+    <Endpoints>
+      <InputEndpoint name="Endpoint1" protocol="http" port="80" />
+    </Endpoints>
+    <Imports>
+      <Import moduleName="Diagnostics" />
+    </Imports>
+
+    <ConfigurationSettings>
+      <Setting name="Diagnostics.ScheduledTransferPeriod" />
+      <Setting name="Diagnostics.LogLevelFilter" />
+      <Setting name="Diagnostics.PerformanceCounterSampleRate" />
+      <Setting name="DbContext.booking" />
+      <Setting name="DbContext.SqlBus" />
+      <Setting name="DbContext.BlobStorage" />
+      <Setting name="MaintenanceMode" />
+      <Setting name="InstrumentationEnabled" />
+    </ConfigurationSettings>
+  </WebRole>
+  <WorkerRole name="WorkerRoleCommandProcessor" vmsize="Small">
+    <Imports>
+      <Import moduleName="Diagnostics" />
+    </Imports>
+    <ConfigurationSettings>
+      <Setting name="Diagnostics.ScheduledTransferPeriod" />
+      <Setting name="Diagnostics.LogLevelFilter" />
+      <Setting name="Diagnostics.PerformanceCounterSampleRate" />
+      <Setting name="DbContext.EventStore" />
+      <Setting name="DbContext.BlobStorage" />
+      <Setting name="DbContext.BookingProcess" />
+      <Setting name="DbContext.CarRentals" />
+      <Setting name="DbContext.SqlBus" />
+      <Setting name="DbContext.booking" />
+      <Setting name="MaintenanceMode" />
+      <Setting name="DbContext.MessageLog" />
+      <Setting name="InstrumentationEnabled" />
+    </ConfigurationSettings>
+
+  </WorkerRole>
+</ServiceDefinition>

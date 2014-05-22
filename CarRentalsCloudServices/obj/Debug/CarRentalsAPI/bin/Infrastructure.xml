@@ -1,0 +1,442 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Infrastructure</name>
+    </assembly>
+    <members>
+        <member name="T:Infrastructure.Database.IAggregateRoot">
+            <summary>
+            Represents an identifiable entity in the system.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Database.IDataContext`1">
+            <summary>
+            Represents a temporary data context to load and save an entity that implements <see cref="T:Infrastructure.Database.IAggregateRoot"/>.
+            </summary>
+            <typeparam name="T">The entity type that will be retrieved or persisted.</typeparam>
+        </member>
+        <member name="T:Infrastructure.EventSourcing.IMementoOriginator">
+            <summary>
+            Defines that the implementor can create memento objects (snapshots), that can be used to recreate the original state.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.EventSourcing.IMementoOriginator.SaveToMemento">
+            <summary>
+            Saves the object's state to an opaque memento object (a snapshot) that can be used to restore the state.
+            </summary>
+            <returns>An opaque memento object that can be used to restore the state.</returns>
+        </member>
+        <member name="T:Infrastructure.EventSourcing.IMemento">
+            <summary>
+            An opaque object that contains the state of another object (a snapshot) and can be used to restore its state.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.EventSourcing.IMemento.Version">
+            <summary>
+            The version of the <see cref="T:Infrastructure.EventSourcing.IEventSourced"/> instance.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.MessageLog.EventLogExtensions">
+            <summary>
+            Provides usability overloads and fluent querying API for the event log.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.MessageLog.EventLogExtensions.ReadAll(Infrastructure.MessageLog.IEventLogReader)">
+            <summary>
+            Reads all events in the log.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.MessageLog.EventLogExtensions.Query(Infrastructure.MessageLog.IEventLogReader)">
+            <summary>
+            Queries the specified log using a fluent API.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.MessageLog.EventLogExtensions.IEventQuery">
+            <summary>
+            Provides a fluent API to filter events from the event log. 
+            </summary>
+        </member>
+        <member name="M:Infrastructure.MessageLog.EventLogExtensions.IEventQuery.Execute">
+            <summary>
+            Executes the query built using the fluent API 
+            against the underlying store.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.MessageLog.EventLogExtensions.IEventQuery.WithTypeName(System.String)">
+            <summary>
+            Filters events with a matching type name metadata.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.MessageLog.EventLogExtensions.IEventQuery.WithFullName(System.String)">
+            <summary>
+            Filters events with a matching full type name metadata.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.MessageLog.EventLogExtensions.IEventQuery.FromAssembly(System.String)">
+            <summary>
+            Filters events with a matching assembly name metadata.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.MessageLog.EventLogExtensions.IEventQuery.FromNamespace(System.String)">
+            <summary>
+            Filters events with a matching namespace metadata.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.MessageLog.EventLogExtensions.IEventQuery.FromSource(System.String)">
+            <summary>
+            Filters events with a matching source type name metadata.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.MessageLog.EventLogExtensions.IEventQuery.Until(System.DateTime)">
+            <summary>
+            Filters events that occurred until the specified date.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.MessageLog.EventLogExtensions.EventQuery">
+            <summary>
+            Implements the criteria builder fluent API.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.MessageLog.IEventLogReader">
+            <summary>
+            Exposes the message log for all events that the system processed.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.MessageLog.QueryCriteria">
+            <summary>
+            The query criteria for filtering events from the message log when reading.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.EventSourcing.EventSourced">
+            <summary>
+            Base class for event sourced entities that implements <see cref="T:Infrastructure.EventSourcing.IEventSourced"/>. 
+            </summary>
+            <remarks>
+            <see cref="T:Infrastructure.EventSourcing.IEventSourced"/> entities do not require the use of <see cref="T:Infrastructure.EventSourcing.EventSourced"/>, but this class contains some common 
+            useful functionality related to versions and rehydration from past events.
+            </remarks>
+        </member>
+        <member name="T:Infrastructure.EventSourcing.IEventSourced">
+            <summary>
+            Represents an identifiable entity that is event sourced.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.EventSourcing.IEventSourced.Id">
+            <summary>
+            Gets the entity identifier.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.EventSourcing.IEventSourced.Version">
+            <summary>
+            Gets the entity's version. As the entity is being updated and events being generated, the version is incremented.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.EventSourcing.IEventSourced.Events">
+            <summary>
+            Gets the collection of new events since the entity was loaded, as a consequence of command handling.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.EventSourcing.EventSourced.Handles``1(System.Action{``0})">
+            <summary>
+            Configures a handler for an event. 
+            </summary>
+        </member>
+        <member name="P:Infrastructure.EventSourcing.EventSourced.Version">
+            <summary>
+            Gets the entity's version. As the entity is being updated and events being generated, the version is incremented.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.EventSourcing.EventSourced.Events">
+            <summary>
+            Gets the collection of new events since the entity was loaded, as a consequence of command handling.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.EventSourcing.IEventSourcedRepository`1.Find(System.Guid)">
+            <summary>
+            Tries to retrieve the event sourced entity.
+            </summary>
+            <param name="id">The id of the entity</param>
+            <returns>The hydrated entity, or null if it does not exist.</returns>
+        </member>
+        <member name="M:Infrastructure.EventSourcing.IEventSourcedRepository`1.Get(System.Guid)">
+            <summary>
+            Retrieves the event sourced entity.
+            </summary>
+            <param name="id">The id of the entity</param>
+            <returns>The hydrated entity</returns>
+            <exception cref="T:Infrastructure.EntityNotFoundException">If the entity is not found.</exception>
+        </member>
+        <member name="M:Infrastructure.EventSourcing.IEventSourcedRepository`1.Save(`0,System.String)">
+            <summary>
+            Saves the event sourced entity.
+            </summary>
+            <param name="eventSourced">The entity.</param>
+            <param name="correlationId">A correlation id to use when publishing events.</param>
+        </member>
+        <member name="T:Infrastructure.EventSourcing.IVersionedEvent">
+            <summary>
+            Represents an event message that belongs to an ordered event stream.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Messaging.IEvent">
+            <summary>
+            Represents an event message.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Messaging.IEvent.SourceId">
+            <summary>
+            Gets the identifier of the source originating the event.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.EventSourcing.IVersionedEvent.Version">
+            <summary>
+            Gets the version or order of the event in the stream.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.ExpressionCombiner">
+            <summary>
+            Combines expressions. Based on the original post by Colin Meek:
+            http://blogs.msdn.com/b/meek/archive/2008/05/02/linq-to-entities-combining-predicates.aspx
+            </summary>
+        </member>
+        <member name="T:Infrastructure.IMetadataProvider">
+            <summary>
+            Extracts metadata about a payload so that it's placed in the 
+            message envelope.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.IMetadataProvider.GetMetadata(System.Object)">
+            <summary>
+            Gets metadata associated with the payload, which can be 
+            used by processors to filter and selectively subscribe to 
+            messages.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Messaging.CommandBusExtensions">
+            <summary>
+            Provides usability overloads for <see cref="T:Infrastructure.Messaging.ICommandBus"/>
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Messaging.IMessageSessionProvider">
+            <summary>
+            If a command message implements <see cref="T:Infrastructure.Messaging.IMessageSessionProvider"/>, it hints implementations of 
+            <see cref="T:Infrastructure.Messaging.ICommandBus"/> to assign the specified SessionId to the outgoing messages if supported.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Messaging.EventBusExtensions">
+            <summary>
+            Provides usability overloads for <see cref="T:Infrastructure.Messaging.IEventBus"/>
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Messaging.Envelope">
+            <summary>
+            Static factory class for <see cref="T:Infrastructure.Messaging.Envelope`1"/>.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Messaging.Envelope.Create``1(``0)">
+            <summary>
+            Creates an envelope for the given body.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Messaging.Envelope`1">
+            <summary>
+            Provides the envelope for an object that will be sent to a bus.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Messaging.Envelope`1.#ctor(`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infrastructure.Messaging.Envelope`1"/> class.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Messaging.Envelope`1.Body">
+            <summary>
+            Gets the body.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Messaging.Envelope`1.Delay">
+            <summary>
+            Gets or sets the delay for sending, enqueing or processing the body.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Messaging.Envelope`1.TimeToLive">
+            <summary>
+            Gets or sets the time to live for the message in the queue.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Messaging.Envelope`1.CorrelationId">
+            <summary>
+            Gets the correlation id.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Messaging.Envelope`1.MessageId">
+            <summary>
+            Gets the correlation id.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Messaging.Handling.ICommandHandler">
+            <summary>
+            Marker interface that makes it easier to discover handlers via reflection.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Messaging.Handling.IEventHandler">
+            <summary>
+            Marker interface that makes it easier to discover handlers via reflection.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Messaging.ICommand.Id">
+            <summary>
+            Gets the command identifier.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Messaging.IEventBus">
+            <summary>
+            An event bus that sends serialized object payloads.
+            </summary>
+            <remarks>Note that <see cref="T:Infrastructure.EventSourcing.IEventSourced"/> entities persisted through 
+            the <see cref="T:Infrastructure.EventSourcing.IEventSourcedRepository`1"/> do not
+            use the <see cref="T:Infrastructure.Messaging.IEventBus"/>, but has its own event publishing mechanism.</remarks>
+        </member>
+        <member name="T:Infrastructure.Messaging.IEventPublisher">
+            <summary>
+            Defines that the object exposes events that are meant to be published.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Processes.IProcessManager">
+            <summary>
+            Interface implemented by process managers (also known as Sagas in the CQRS community) that 
+            publish commands to the command bus.
+            </summary>
+            <remarks>
+            <para>See <see cref="!:http://go.microsoft.com/fwlink/p/?LinkID=258564">Reference 6</see> for a description of what is a Process Manager.</para>
+            <para>There are a few things that we learnt along the way regarding Process Managers, which we might do differently with the new insights that we
+            now have. See <see cref="!:http://go.microsoft.com/fwlink/p/?LinkID=258558"> Journey lessons learnt</see> for more information.</para>
+            </remarks>
+        </member>
+        <member name="P:Infrastructure.Processes.IProcessManager.Id">
+            <summary>
+            Gets the process manager identifier.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Processes.IProcessManager.Completed">
+            <summary>
+            Gets a value indicating whether the process manager workflow is completed and the state can be archived.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Processes.IProcessManager.Commands">
+            <summary>
+            Gets a collection of commands that need to be sent when the state of the process manager is persisted.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Serialization.ITextSerializer">
+            <summary>
+            Interface for serializers that can read/write an object graph to a stream.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Serialization.ITextSerializer.Serialize(System.IO.TextWriter,System.Object)">
+            <summary>
+            Serializes an object graph to a text reader.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Serialization.ITextSerializer.Deserialize(System.IO.TextReader)">
+            <summary>
+            Deserializes an object graph from the specified text reader.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Serialization.TextSerializerExtensions">
+            <summary>
+            Usability overloads for <see cref="T:Infrastructure.Serialization.ITextSerializer"/>.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Serialization.TextSerializerExtensions.Serialize``1(Infrastructure.Serialization.ITextSerializer,``0)">
+            <summary>
+            Serializes the given data object as a string.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Serialization.TextSerializerExtensions.Deserialize``1(Infrastructure.Serialization.ITextSerializer,System.String)">
+            <summary>
+            Deserializes the specified string into an object of type <typeparamref name="T"/>.
+            </summary>
+            <exception cref="T:System.InvalidCastException">The deserialized object is not of type <typeparamref name="T"/>.</exception>
+        </member>
+        <member name="T:Infrastructure.StandardMetadata">
+            <summary>
+            Exposes the property names of standard metadata added to all 
+            messages going through the bus.
+            </summary>
+        </member>
+        <member name="F:Infrastructure.StandardMetadata.EventKind">
+            <summary>
+            An event message.
+            </summary>
+        </member>
+        <member name="F:Infrastructure.StandardMetadata.CommandKind">
+            <summary>
+            A command message.
+            </summary>
+        </member>
+        <member name="F:Infrastructure.StandardMetadata.Kind">
+            <summary>
+            Kind of message, either <see cref="F:Infrastructure.StandardMetadata.EventKind"/> or <see cref="F:Infrastructure.StandardMetadata.CommandKind"/>.
+            </summary>
+        </member>
+        <member name="F:Infrastructure.StandardMetadata.SourceId">
+            <summary>
+            Identifier of the object that originated the event, if any.
+            </summary>
+        </member>
+        <member name="F:Infrastructure.StandardMetadata.AssemblyName">
+            <summary>
+            The simple assembly name of the message payload (i.e. event or command).
+            </summary>
+        </member>
+        <member name="F:Infrastructure.StandardMetadata.Namespace">
+            <summary>
+            The namespace of the message payload (i.e. event or command).
+            </summary>
+        </member>
+        <member name="F:Infrastructure.StandardMetadata.FullName">
+            <summary>
+            The full type name of the message payload (i.e. event or command).
+            </summary>
+        </member>
+        <member name="F:Infrastructure.StandardMetadata.TypeName">
+            <summary>
+            The simple type name (without the namespace) of the message payload (i.e. event or command).
+            </summary>
+        </member>
+        <member name="F:Infrastructure.StandardMetadata.SourceType">
+            <summary>
+            The name of the entity that originated this message.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.StandardMetadataProvider">
+            <summary>
+            Extracts metadata about a payload so that it's placed in the 
+            message envelope.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.StandardMetadataProvider.GetMetadata(System.Object)">
+            <summary>
+            Gets metadata associated with the payload, which can be
+            used by processors to filter and selectively subscribe to
+            messages.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Tasks.TimerTaskFactory.StartNew``1(System.Func{``0},System.Func{``0,System.Boolean},System.TimeSpan,System.TimeSpan)">
+            <summary>
+            Starts a new task that will poll for a result using the specified function, and will be completed when it satisfied the specified condition.
+            </summary>
+            <typeparam name="T">The type of value that will be returned when the task completes.</typeparam>
+            <param name="getResult">Function that will be used for polling.</param>
+            <param name="isResultValid">Predicate that determines if the result is valid, or if it should continue polling</param>
+            <param name="pollInterval">Polling interval.</param>
+            <param name="timeout">The timeout interval.</param>
+            <returns>The result returned by the specified function, or <see langword="null"/> if the result is not valid and the task times out.</returns>
+        </member>
+        <member name="M:Infrastructure.Utils.GuidUtil.NewSequentialId">
+            <summary>
+            Creates a sequential GUID according to SQL Server's ordering rules.
+            </summary>
+        </member>
+    </members>
+</doc>

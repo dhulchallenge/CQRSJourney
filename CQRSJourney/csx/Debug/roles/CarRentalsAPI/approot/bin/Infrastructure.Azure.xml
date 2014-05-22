@@ -1,0 +1,713 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Infrastructure.Azure</name>
+    </assembly>
+    <members>
+        <member name="T:Infrastructure.Azure.BlobStorage.BlobStorageSettings">
+            <summary>
+            Simple settings class to configure the connection to Windows Azure blobs.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.BlobStorage.BlobStorageSettings.ConnectionString">
+            <summary>
+            Gets or sets the service URI scheme.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.BlobStorage.BlobStorageSettings.RootContainerName">
+            <summary>
+            Gets or sets the name of the Windows Azure blob container used for read models.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Azure.DynamicThrottling">
+            <summary>
+            Provides a way to throttle the work depending on the number of jobs it is able to complete and whether
+            the job is penalized for trying to parallelize too many jobs.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.DynamicThrottling.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of <see cref="T:Infrastructure.Azure.DynamicThrottling"/>.
+            </summary>
+            <param name="maxDegreeOfParallelism">Maximum number of parallel jobs.</param>
+            <param name="minDegreeOfParallelism">Minimum number of parallel jobs.</param>
+            <param name="penaltyAmount">Number of degrees of parallelism to remove when penalizing slightly.</param>
+            <param name="workFailedPenaltyAmount">Number of degrees of parallelism to remove when work fails.</param>
+            <param name="workCompletedParallelismGain">Number of degrees of parallelism to restore on work completed.</param>
+            <param name="intervalForRestoringDegreeOfParallelism">Interval in milliseconds to restore 1 degree of parallelism.</param>
+        </member>
+        <member name="T:System.Collections.Generic.DictionaryExtensions">
+            <summary>
+            Usability extensions for dictionaries.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.DictionaryExtensions.TryGetValue``2(System.Collections.Generic.IDictionary{``0,``1},``0)">
+            <summary>
+            Gets an item from the dictionary, if it's found.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.DictionaryExtensions.TryGetValue``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1)">
+            <summary>
+            Gets an item from the dictionary, if it's found. Otherwise, 
+            returns the specified default value.
+            </summary>
+        </member>
+        <member name="F:Infrastructure.Azure.Instrumentation.AzureInstrumentationInstaller.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Instrumentation.AzureInstrumentationInstaller.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Infrastructure.Azure.Instrumentation.AzureInstrumentationInstaller.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.MessageLog.MessageLogEntity.Kind">
+            <summary>
+            Gets or sets the kind of entry, Command or Event.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.MessageLog.MessageLogEntity.CorrelationId">
+            <summary>
+            Gets or sets the message correlation id.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.MessageLog.MessageLogEntity.MessageId">
+            <summary>
+            Gets or sets the message id.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.MessageLog.MessageLogEntity.SourceId">
+            <summary>
+            The identifier of the object that generated the event.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.MessageLog.MessageLogEntity.AssemblyName">
+            <summary>
+            The simple assembly name of the message payload (i.e. event or command).
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.MessageLog.MessageLogEntity.Namespace">
+            <summary>
+            The namespace of the message payload (i.e. event or command).
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.MessageLog.MessageLogEntity.FullName">
+            <summary>
+            The full type name of the message payload (i.e. event or command).
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.MessageLog.MessageLogEntity.TypeName">
+            <summary>
+            The simple type name (without the namespace) of the message payload (i.e. event or command).
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.MessageLog.MessageLogEntity.SourceType">
+            <summary>
+            The name of the entity that originated this message.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.MessageLog.MessageLogEntity.CreationDate">
+            <summary>
+            The date and time when this message was created (in Round-trip format)
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.MessageLog.MessageLogEntity.Payload">
+            <summary>
+            Gets or sets the payload of the log.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Azure.MessageLog.MessageLogSettings">
+            <summary>
+            Simple settings class to configure the connection to Windows Azure tables.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.MessageLog.MessageLogSettings.ConnectionString">
+            <summary>
+            Gets or sets the service URI scheme.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.MessageLog.MessageLogSettings.TableName">
+            <summary>
+            Gets or sets the name of the Windows Azure table used for the message log.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Azure.EventSourcing.AzureEventSourcedRepository`1">
+            <summary>
+            Defines a repository of <see cref="T:Infrastructure.EventSourcing.IEventSourced"/> entities.
+            </summary>
+            <typeparam name="T">The entity type to persist.</typeparam>
+            <remarks>
+            <para>This is a basic implementation of the event store that could be optimized in the future.</para>
+            <para>It supports caching of snapshot if the entity implements the <see cref="T:Infrastructure.EventSourcing.IMementoOriginator"/> interface. Ideally, this could be optimized to
+            integrate better with sessionful message processors, so that the when the process is guaranteed to be the single temporary writer of a certain entity 
+            instance, then there is no need to check for updates in the the <see cref="T:Infrastructure.Azure.EventSourcing.IEventStore"/> since the last  cached snapshot (<see cref="T:Infrastructure.EventSourcing.IMemento"/>).</para>
+            <para>Also, it would be very valuable to provide asynchronous APIs to avoid blocking I/O calls.</para>
+            <para>See <see cref="!:http://go.microsoft.com/fwlink/p/?LinkID=258557"> Journey chapter 7</see> for more potential performance and scalability optimizations.</para>
+            </remarks>
+        </member>
+        <member name="T:Infrastructure.Azure.EventSourcing.IEventStoreBusPublisher">
+            <summary>
+            Represents a process that reliably publishes events that are marked as pending in an event store.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.EventSourcing.IEventStoreBusPublisher.Start(System.Threading.CancellationToken)">
+            <summary>
+            Starts processing pending events.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.EventSourcing.IEventStoreBusPublisher.SendAsync(System.String,System.Int32)">
+            <summary>
+            Notifies the publisher that there are new pending events in the specified partitionKey.
+            </summary>
+            <param name="partitionKey">The partition key or session ID.</param>
+            <param name="eventCount">A hint that specifies how many new events are pending.</param>
+        </member>
+        <member name="T:Infrastructure.Azure.EventSourcing.IPendingEventsQueue">
+            <summary>
+            Represents an event store that contains events that are marked as pending for publishing.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.EventSourcing.IPendingEventsQueue.GetPendingAsync(System.String,System.Action{System.Collections.Generic.IEnumerable{Infrastructure.Azure.EventSourcing.IEventRecord},System.Boolean},System.Action{System.Exception})">
+            <summary>
+            Gets the pending events for publishing asynchronously using delegate continuations.
+            </summary>
+            <param name="partitionKey">The partition key to get events from.</param>
+            <param name="successCallback">The callback that will be called if the data is successfully retrieved. 
+            The first argument of the callback is the list of pending events.
+            The second argument is true if there are more records that were not retrieved.</param>
+            <param name="exceptionCallback">The callback used if there is an exception that does not allow to continue.</param>
+        </member>
+        <member name="M:Infrastructure.Azure.EventSourcing.IPendingEventsQueue.DeletePendingAsync(System.String,System.String,System.Action{System.Boolean},System.Action{System.Exception})">
+            <summary>
+            Deletes the specified pending event from the queue.
+            </summary>
+            <param name="partitionKey">The partition key of the event.</param>
+            <param name="rowKey">The partition key of the event.</param>
+            <param name="successCallback">The callback that will be called if the data is successfully retrieved.
+            The argument specifies if the row was deleted. If false, it means that the row did not exist.
+            </param>
+            <param name="exceptionCallback">The callback used if there is an exception that does not allow to continue.</param>
+        </member>
+        <member name="M:Infrastructure.Azure.EventSourcing.IPendingEventsQueue.GetPartitionsWithPendingEvents">
+            <summary>
+            Gets the list of all partitions that have pending unpublished events.
+            </summary>
+            <returns>The list of all partitions.</returns>
+        </member>
+        <member name="E:Infrastructure.Azure.EventSourcing.IPendingEventsQueue.Retrying">
+            <summary>
+            Notifies that the sender is retrying due to a transient fault.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Azure.EventSourcing.EventStore">
+            <summary>
+            Implements an event store using Windows Azure Table Storage.
+            </summary>
+            <remarks>
+            <para> This class works closely related to <see cref="T:Infrastructure.Azure.EventSourcing.EventStoreBusPublisher"/> and <see cref="T:Infrastructure.Azure.EventSourcing.AzureEventSourcedRepository`1"/>, and provides a resilient mechanism to 
+            store events, and also manage which events are pending for publishing to an event bus.</para>
+            <para>Ideally, it would be very valuable to provide asynchronous APIs to avoid blocking I/O calls.</para>
+            <para>See <see cref="!:http://go.microsoft.com/fwlink/p/?LinkID=258557"> Journey chapter 7</see> for more potential performance and scalability optimizations.</para>
+            </remarks>
+        </member>
+        <member name="M:Infrastructure.Azure.EventSourcing.EventStore.GetPendingAsync(System.String,System.Action{System.Collections.Generic.IEnumerable{Infrastructure.Azure.EventSourcing.IEventRecord},System.Boolean},System.Action{System.Exception})">
+            <summary>
+            Gets the pending events for publishing asynchronously using delegate continuations.
+            </summary>
+            <param name="partitionKey">The partition key to get events from.</param>
+            <param name="successCallback">The callback that will be called if the data is successfully retrieved. 
+            The first argument of the callback is the list of pending events.
+            The second argument is true if there are more records that were not retrieved.</param>
+            <param name="exceptionCallback">The callback used if there is an exception that does not allow to continue.</param>
+        </member>
+        <member name="M:Infrastructure.Azure.EventSourcing.EventStore.DeletePendingAsync(System.String,System.String,System.Action{System.Boolean},System.Action{System.Exception})">
+            <summary>
+            Deletes the specified pending event from the queue.
+            </summary>
+            <param name="partitionKey">The partition key of the event.</param>
+            <param name="rowKey">The partition key of the event.</param>
+            <param name="successCallback">The callback that will be called if the data is successfully retrieved.
+            The argument specifies if the row was deleted. If false, it means that the row did not exist.
+            </param>
+            <param name="exceptionCallback">The callback used if there is an exception that does not allow to continue.</param>
+        </member>
+        <member name="M:Infrastructure.Azure.EventSourcing.EventStore.GetPartitionsWithPendingEvents">
+            <summary>
+            Gets the list of all partitions that have pending unpublished events.
+            </summary>
+            <returns>The list of all partitions.</returns>
+        </member>
+        <member name="E:Infrastructure.Azure.EventSourcing.EventStore.Retrying">
+            <summary>
+            Notifies that the sender is retrying due to a transient fault.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Azure.EventSourcing.EventStoreBusPublisher">
+            <summary>
+            Publishes events in the <see cref="T:Infrastructure.Azure.EventSourcing.EventStore"/> to the service bus.
+            </summary>
+            <remarks>
+            This class works closely related to <see cref="T:Infrastructure.Azure.EventSourcing.EventStore"/> and <see cref="T:Infrastructure.Azure.EventSourcing.AzureEventSourcedRepository`1"/>, and provides a resilient mechanism to 
+            asynchronously publish events to the service bus.
+            This class parallelizes the sending of events acknowledging possible service throttling, but makes sure that events for the same partition are 
+            published in order using the same SessionId, so consumers of the events that use subscriptions with sessions are guaranteed to receive the events 
+            in order within each session.
+            <para>
+            We could still make several performance improvements. For example, instead of sending 1 event per <see cref="T:Microsoft.ServiceBus.Messaging.BrokeredMessage"/> we could
+            bundle several events for the same session into a single message, reducing the number of I/O calls to both the service bus and table storage, and
+            it would also avoid waiting for a message to be completed before sending the next message for the same partition. This change would require some
+            changes in other components and the message metadata as well. See <see cref="!:http://go.microsoft.com/fwlink/p/?LinkID=258557"> Journey chapter 7</see>
+            for more potential performance and scalability optimizations.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:Infrastructure.Azure.Messaging.CommandBus">
+            <summary>
+            A command bus that sends serialized object payloads through a <see cref="T:Infrastructure.Azure.Messaging.IMessageSender"/>.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.CommandBus.#ctor(Infrastructure.Azure.Messaging.IMessageSender,Infrastructure.IMetadataProvider,Infrastructure.Serialization.ITextSerializer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infrastructure.Azure.Messaging.CommandBus"/> class.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.CommandBus.Send(Infrastructure.Messaging.Envelope{Infrastructure.Messaging.ICommand})">
+            <summary>
+            Sends the specified command.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Azure.EventSourcing.EventSourcingSettings">
+            <summary>
+            Simple settings class to configure the connection to Windows Azure tables.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.EventSourcing.EventSourcingSettings.ConnectionString">
+            <summary>
+            Gets or sets the service URI scheme.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.EventSourcing.EventSourcingSettings.OrdersTableName">
+            <summary>
+            Gets or sets the name of the Windows Azure table used for the Orders and Seats Assignments Event Store.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.EventSourcing.EventSourcingSettings.SeatsAvailabilityTableName">
+            <summary>
+            Gets or sets the name of the Windows Azure table used for the Seats Availability Event Store.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Azure.InfrastructureSettings">
+            <summary>
+            Simple settings class to configure the connection to Windows Azure services.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.InfrastructureSettings.Read(System.String)">
+            <summary>
+            Reads the settings from the specified file.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Azure.Messaging.EventBus">
+            <summary>
+            An event bus that sends serialized object payloads through a <see cref="T:Infrastructure.Azure.Messaging.IMessageSender"/>.
+            </summary>
+            <remarks>Note that <see cref="T:Infrastructure.EventSourcing.IEventSourced"/> entities persisted through the <see cref="T:Infrastructure.EventSourcing.IEventSourcedRepository`1"/>
+            do not use the <see cref="T:Infrastructure.Messaging.IEventBus"/>, but has its own event publishing mechanism.</remarks>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.EventBus.#ctor(Infrastructure.Azure.Messaging.IMessageSender,Infrastructure.IMetadataProvider,Infrastructure.Serialization.ITextSerializer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infrastructure.Azure.Messaging.EventBus"/> class.
+            </summary>
+            <param name="serializer">The serializer to use for the message body.</param>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.EventBus.Publish(Infrastructure.Messaging.Envelope{Infrastructure.Messaging.IEvent})">
+            <summary>
+            Sends the specified event.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.EventBus.Publish(System.Collections.Generic.IEnumerable{Infrastructure.Messaging.Envelope{Infrastructure.Messaging.IEvent}})">
+            <summary>
+            Publishes the specified events.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.Handling.CommandDispatcher.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infrastructure.Azure.Messaging.Handling.CommandDispatcher"/> class.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.Handling.CommandDispatcher.Register(Infrastructure.Messaging.Handling.ICommandHandler)">
+            <summary>
+            Registers the specified command handler.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.Handling.CommandDispatcher.ProcessMessage(System.String,Infrastructure.Messaging.ICommand,System.String,System.String)">
+            <summary>
+            Processes the message by calling the registered handler.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Azure.Messaging.Handling.CommandProcessor">
+            <summary>
+            Processes incoming commands from the bus and routes them to the appropriate 
+            handlers.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Azure.Messaging.Handling.MessageProcessor">
+            <summary>
+            Provides basic common processing code for components that handle 
+            incoming messages from a receiver.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.Handling.MessageProcessor.#ctor(Infrastructure.Azure.Messaging.IMessageReceiver,Infrastructure.Serialization.ITextSerializer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infrastructure.Azure.Messaging.Handling.MessageProcessor"/> class.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.Handling.MessageProcessor.Start">
+            <summary>
+            Starts the listener.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.Handling.MessageProcessor.Stop">
+            <summary>
+            Stops the listener.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.Handling.MessageProcessor.Dispose">
+            <summary>
+            Disposes the resources used by the processor.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.Handling.MessageProcessor.ProcessMessage(System.String,System.Object,System.String,System.String)">
+            <summary>
+            Processes the message.
+            </summary>
+            <param name="traceIdentifier">The identifier that can be used to track the source message in the logs.</param>
+            <param name="payload">The typed message payload.</param>
+            <param name="messageId">The message id.</param>
+            <param name="correlationId">The message correlation id.</param>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.Handling.MessageProcessor.Dispose(System.Boolean)">
+            <summary>
+            Disposes the resources used by the processor.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.Handling.CommandProcessor.#ctor(Infrastructure.Azure.Messaging.IMessageReceiver,Infrastructure.Serialization.ITextSerializer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infrastructure.Azure.Messaging.Handling.CommandProcessor"/> class.
+            </summary>
+            <param name="receiver">The receiver to use. If the receiver is <see cref="T:System.IDisposable"/>, it will be disposed when the processor is 
+            disposed.</param>
+            <param name="serializer">The serializer to use for the message body.</param>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.Handling.CommandProcessor.Register(Infrastructure.Messaging.Handling.ICommandHandler)">
+            <summary>
+            Registers the specified command handler.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.Handling.CommandProcessor.ProcessMessage(System.String,System.Object,System.String,System.String)">
+            <summary>
+            Processes the message by calling the registered handler.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Azure.Messaging.Handling.EventProcessor">
+            <summary>
+            Processes incoming events from the bus and routes them to the appropriate 
+            handlers.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Azure.Messaging.MessageReleaseAction">
+            <summary>
+            Sepecfies how the <see cref="T:Microsoft.ServiceBus.Messaging.BrokeredMessage"/> should be released.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Azure.Messaging.SessionSubscriptionReceiver">
+            <summary>
+            Implements an asynchronous receiver of messages from a Windows Azure 
+            Service Bus topic subscription using sessions.
+            </summary>
+            <remarks>
+            <para>
+            In V3 we made a lot of changes to optimize the performance and scalability of the receiver.
+            See <see cref="!:http://go.microsoft.com/fwlink/p/?LinkID=258557"> Journey chapter 7</see> for more information on the optimizations and migration to V3.
+            </para>
+            <para>
+            The current implementation uses async calls to communicate with the service bus, although the message processing is done with a blocking synchronous call.
+            We could still make several performance improvements. For example, we could take advantage of sessions and batch multiple messages to avoid accessing the
+            repositories multiple times where appropriate. See <see cref="!:http://go.microsoft.com/fwlink/p/?LinkID=258557"> Journey chapter 7</see> for more potential 
+            performance and scalability optimizations.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:Infrastructure.Azure.Messaging.IMessageReceiver">
+            <summary>
+            Abstracts the behavior of a receiving component that raises 
+            an event for every received event.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.IMessageReceiver.Start(System.Func{Microsoft.ServiceBus.Messaging.BrokeredMessage,Infrastructure.Azure.Messaging.MessageReleaseAction})">
+            <summary>
+            Starts the listener.
+            </summary>
+            <param name="messageHandler">Handler for incoming messages. The return value indicates how to release the message lock.</param>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.IMessageReceiver.Stop">
+            <summary>
+            Stops the listener.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.SessionSubscriptionReceiver.#ctor(Infrastructure.Azure.Messaging.ServiceBusSettings,System.String,System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infrastructure.Azure.Messaging.SubscriptionReceiver"/> class, 
+            automatically creating the topic and subscription if they don't exist.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.SessionSubscriptionReceiver.#ctor(Infrastructure.Azure.Messaging.ServiceBusSettings,System.String,System.String,System.Boolean,Infrastructure.Azure.Instrumentation.ISessionSubscriptionReceiverInstrumentation,Microsoft.Practices.TransientFaultHandling.RetryStrategy)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infrastructure.Azure.Messaging.SessionSubscriptionReceiver"/> class, 
+            automatically creating the topic and subscription if they don't exist.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.SessionSubscriptionReceiver.Start(System.Func{Microsoft.ServiceBus.Messaging.BrokeredMessage,Infrastructure.Azure.Messaging.MessageReleaseAction})">
+            <summary>
+            Starts the listener.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.SessionSubscriptionReceiver.Stop">
+            <summary>
+            Stops the listener.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.SessionSubscriptionReceiver.Dispose">
+            <summary>
+            Stops the listener if it was started previously.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.SessionSubscriptionReceiver.ReceiveMessagesAndCloseSession(Microsoft.ServiceBus.Messaging.MessageSession,System.Threading.CancellationToken)">
+            <summary>
+            Receives the messages in an asynchronous loop and closes the session once there are no more messages.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.Messaging.SessionSubscriptionReceiver.MessageHandler">
+            <summary>
+            Handler for incoming messages. The return value indicates whether the message should be disposed.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Azure.Messaging.BrokeredMessageEventArgs">
+            <summary>
+            Provides the brokered message payload of an event.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.BrokeredMessageEventArgs.#ctor(Microsoft.ServiceBus.Messaging.BrokeredMessage)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infrastructure.Azure.Messaging.BrokeredMessageEventArgs"/> class.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.Messaging.BrokeredMessageEventArgs.Message">
+            <summary>
+            Gets the message associated with the event.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.Messaging.BrokeredMessageEventArgs.DoNotDisposeMessage">
+            <summary>
+            Gets or sets an indication that the message should not be disposed by the originating receiver.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Azure.Messaging.IMessageSender">
+            <summary>
+            Abstracts the behavior of sending a message.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.IMessageSender.Send(System.Func{Microsoft.ServiceBus.Messaging.BrokeredMessage})">
+            <summary>
+            Sends the specified message synchronously.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.IMessageSender.SendAsync(System.Func{Microsoft.ServiceBus.Messaging.BrokeredMessage})">
+            <summary>
+            Sends the specified message asynchronously.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.IMessageSender.SendAsync(System.Func{Microsoft.ServiceBus.Messaging.BrokeredMessage},System.Action,System.Action{System.Exception})">
+            <summary>
+            Sends the specified message asynchronously.
+            </summary>
+        </member>
+        <member name="E:Infrastructure.Azure.Messaging.IMessageSender.Retrying">
+            <summary>
+            Notifies that the sender is retrying due to a transient fault.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Azure.Messaging.SubscriptionReceiver">
+            <summary>
+            Implements an asynchronous receiver of messages from a Windows Azure 
+            Service Bus topic subscription.
+            </summary>
+            <remarks>
+            <para>
+            In V3 we made a lot of changes to optimize the performance and scalability of the receiver.
+            See <see cref="!:http://go.microsoft.com/fwlink/p/?LinkID=258557"> Journey chapter 7</see> for more information on the optimizations and migration to V3.
+            </para>
+            <para>
+            The current implementation uses async calls to communicate with the service bus, although the message processing is done with a blocking synchronous call.
+            We could still make several performance improvements. For example, we could react to system-wide throttling indicators to avoid overwhelming
+            the services when under heavy load. See <see cref="!:http://go.microsoft.com/fwlink/p/?LinkID=258557"> Journey chapter 7</see> for more potential 
+            performance and scalability optimizations.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.SubscriptionReceiver.#ctor(Infrastructure.Azure.Messaging.ServiceBusSettings,System.String,System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infrastructure.Azure.Messaging.SubscriptionReceiver"/> class, 
+            automatically creating the topic and subscription if they don't exist.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.SubscriptionReceiver.#ctor(Infrastructure.Azure.Messaging.ServiceBusSettings,System.String,System.String,System.Boolean,Infrastructure.Azure.Instrumentation.ISubscriptionReceiverInstrumentation)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infrastructure.Azure.Messaging.SubscriptionReceiver"/> class, 
+            automatically creating the topic and subscription if they don't exist.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.SubscriptionReceiver.#ctor(Infrastructure.Azure.Messaging.ServiceBusSettings,System.String,System.String,System.Boolean,Infrastructure.Azure.Instrumentation.ISubscriptionReceiverInstrumentation,Microsoft.Practices.TransientFaultHandling.RetryStrategy)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infrastructure.Azure.Messaging.SubscriptionReceiver"/> class, 
+            automatically creating the topic and subscription if they don't exist.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.SubscriptionReceiver.Start(System.Func{Microsoft.ServiceBus.Messaging.BrokeredMessage,Infrastructure.Azure.Messaging.MessageReleaseAction})">
+            <summary>
+            Starts the listener.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.SubscriptionReceiver.Stop">
+            <summary>
+            Stops the listener.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.SubscriptionReceiver.Dispose">
+            <summary>
+            Stops the listener if it was started previously.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.SubscriptionReceiver.ReceiveMessages(System.Threading.CancellationToken)">
+            <summary>
+            Receives the messages in an endless asynchronous loop.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.Messaging.SubscriptionReceiver.MessageHandler">
+            <summary>
+            Handler for incoming messages. The return value indicates whether the message should be disposed.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Azure.Messaging.ServiceBusSettings">
+            <summary>
+            Simple settings class to configure the connection to the Windows Azure Service Bus.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.ServiceBusSettings.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infrastructure.Azure.Messaging.ServiceBusSettings"/> class.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.Messaging.ServiceBusSettings.ServiceUriScheme">
+            <summary>
+            Gets or sets the service URI scheme.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.Messaging.ServiceBusSettings.ServiceNamespace">
+            <summary>
+            Gets or sets the service namespace.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.Messaging.ServiceBusSettings.ServicePath">
+            <summary>
+            Gets or sets the service path.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.Messaging.ServiceBusSettings.TokenIssuer">
+            <summary>
+            Gets or sets the token issuer.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.Messaging.ServiceBusSettings.TokenAccessKey">
+            <summary>
+            Gets or sets the token access key.
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Azure.Messaging.TopicSettings.XmlDuplicateDetectionHistoryTimeWindow">
+            <summary>
+            Don't access this property directly. Use the properly typed 
+            <see cref="P:Infrastructure.Azure.Messaging.TopicSettings.DuplicateDetectionHistoryTimeWindow"/> instead.
+            </summary>
+            <remarks>
+            XmlSerializer still doesn't know how to convert TimeSpan... 
+            </remarks>
+        </member>
+        <member name="T:Infrastructure.Azure.Messaging.TopicSender">
+            <summary>
+            Implements an asynchronous sender of messages to a Windows Azure Service Bus topic.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.TopicSender.#ctor(Infrastructure.Azure.Messaging.ServiceBusSettings,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infrastructure.Azure.Messaging.TopicSender"/> class, 
+            automatically creating the given topic if it does not exist.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.TopicSender.#ctor(Infrastructure.Azure.Messaging.ServiceBusSettings,System.String,Microsoft.Practices.TransientFaultHandling.RetryStrategy)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infrastructure.Azure.Messaging.TopicSender"/> class, 
+            automatically creating the given topic if it does not exist.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Azure.Messaging.TopicSender.SendAsync(System.Func{Microsoft.ServiceBus.Messaging.BrokeredMessage})">
+            <summary>
+            Asynchronously sends the specified message.
+            </summary>
+        </member>
+        <member name="E:Infrastructure.Azure.Messaging.TopicSender.Retrying">
+            <summary>
+            Notifies that the sender is retrying due to a transient fault.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Util.CacheAnyEnumerableExtensions">
+            <summary>
+            Prevents double enumeration (and potential roundtrip to the data source) when checking 
+            for the presence of items in an enumeration.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Util.CacheAnyEnumerableExtensions.AsCachedAnyEnumerable``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Makes sure that calls to <see cref="M:Infrastructure.Util.CacheAnyEnumerableExtensions.IAnyEnumerable`1.Any"/> are 
+            cached, and reuses the resulting enumerator.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Util.CacheAnyEnumerableExtensions.IAnyEnumerable`1">
+            <summary>
+            Exposes a cached <see cref="M:Infrastructure.Util.CacheAnyEnumerableExtensions.IAnyEnumerable`1.Any"/> operator.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Util.CacheAnyEnumerableExtensions.AnyEnumerable`1">
+            <summary>
+            Lazily computes whether the inner enumerable has 
+            any values, and caches the result.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Infrastructure.Azure.Utils.TaskEx.Delay(System.Int32)">
+            <summary>
+            Starts a Task that will complete after the specified due time.
+            </summary>
+            <param name="dueTime">The delay in milliseconds before the returned task completes.</param>
+            <returns>
+            The timed Task.
+            </returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="CarRentalsCloudServices" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2014-01.2.3">
+  <Role name="CarRentalsAPI">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=challenge2;AccountKey=o3V2w7pkUP3p0Zd3qzF36w/eEbFbX4t5CxfNZES14KPcqVm6DScIctCxmZD2ZffRQbJpxN4fN3Fe28fuDyu0Mg==" />
+      <Setting name="Diagnostics.ScheduledTransferPeriod" value="00:02:00" />
+      <Setting name="Diagnostics.LogLevelFilter" value="Verbose" />
+      <Setting name="Diagnostics.PerformanceCounterSampleRate" value="00:00:30" />
+      <Setting name="DbContext.booking" value="Data Source=LEELAVINOTH\MSSQLSERVER2012;Initial Catalog=CarRentals;User ID=sa;Password=Welcome123" />
+      <Setting name="DbContext.SqlBus" value="Data Source=LEELAVINOTH\MSSQLSERVER2012;Initial Catalog=CarRentals;User ID=sa;Password=Welcome123" />
+      <Setting name="DbContext.BlobStorage" value="Data Source=LEELAVINOTH\MSSQLSERVER2012;Initial Catalog=CarRentals;User ID=sa;Password=Welcome123" />
+      <Setting name="MaintenanceMode" value="false" />
+      <Setting name="InstrumentationEnabled" value="false" />
+    </ConfigurationSettings>
+  </Role>
+  <Role name="WorkerRoleCommandProcessor">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=challenge2;AccountKey=o3V2w7pkUP3p0Zd3qzF36w/eEbFbX4t5CxfNZES14KPcqVm6DScIctCxmZD2ZffRQbJpxN4fN3Fe28fuDyu0Mg==" />
+      <Setting name="Diagnostics.ScheduledTransferPeriod" value="00:02:00" />
+      <Setting name="Diagnostics.LogLevelFilter" value="Verbose" />
+      <Setting name="Diagnostics.PerformanceCounterSampleRate" value="00:00:30" />
+      <Setting name="DbContext.EventStore" value="Data Source=LEELAVINOTH\MSSQLSERVER2012;Initial Catalog=CarRentals;User ID=sa;Password=Welcome123" />
+      <Setting name="DbContext.BlobStorage" value="Data Source=LEELAVINOTH\MSSQLSERVER2012;Initial Catalog=CarRentals;User ID=sa;Password=Welcome123" />
+      <Setting name="DbContext.BookingProcess" value="Data Source=LEELAVINOTH\MSSQLSERVER2012;Initial Catalog=CarRentals;User ID=sa;Password=Welcome123" />
+      <Setting name="DbContext.CarRentals" value="Data Source=LEELAVINOTH\MSSQLSERVER2012;Initial Catalog=CarRentals;User ID=sa;Password=Welcome123" />
+      <Setting name="DbContext.SqlBus" value="Data Source=LEELAVINOTH\MSSQLSERVER2012;Initial Catalog=CarRentals;User ID=sa;Password=Welcome123" />
+      <Setting name="DbContext.booking" value="Data Source=LEELAVINOTH\MSSQLSERVER2012;Initial Catalog=CarRentals;User ID=sa;Password=Welcome123" />
+      <Setting name="MaintenanceMode" value="false" />
+      <Setting name="DbContext.MessageLog" value="Data Source=LEELAVINOTH\MSSQLSERVER2012;Initial Catalog=CarRentals;User ID=sa;Password=Welcome123" />
+      <Setting name="InstrumentationEnabled" value="false" />
+    </ConfigurationSettings>
+  </Role>
+</ServiceConfiguration>

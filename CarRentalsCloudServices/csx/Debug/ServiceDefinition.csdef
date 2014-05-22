@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CarRentalsCloudServices" schemaVersion="2014-01.2.3" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
+  <WebRole name="CarRentalsAPI">
+    <LocalResources>
+      <LocalStorage name="DiagnosticStore" sizeInMB="4096" cleanOnRoleRecycle="false" />
+    </LocalResources>
+    <ConfigurationSettings>
+      <Setting name="DbContext.BlobStorage" />
+      <Setting name="DbContext.booking" />
+      <Setting name="DbContext.SqlBus" />
+      <Setting name="Diagnostics.LogLevelFilter" />
+      <Setting name="Diagnostics.PerformanceCounterSampleRate" />
+      <Setting name="Diagnostics.ScheduledTransferPeriod" />
+      <Setting name="InstrumentationEnabled" />
+      <Setting name="MaintenanceMode" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+    </ConfigurationSettings>
+    <Endpoints>
+      <InputEndpoint name="Endpoint1" protocol="http" port="80" localPort="80" />
+    </Endpoints>
+    <Certificates />
+  </WebRole>
+  <WorkerRole name="WorkerRoleCommandProcessor">
+    <LocalResources>
+      <LocalStorage name="DiagnosticStore" sizeInMB="4096" cleanOnRoleRecycle="false" />
+    </LocalResources>
+    <ConfigurationSettings>
+      <Setting name="DbContext.BlobStorage" />
+      <Setting name="DbContext.booking" />
+      <Setting name="DbContext.BookingProcess" />
+      <Setting name="DbContext.CarRentals" />
+      <Setting name="DbContext.EventStore" />
+      <Setting name="DbContext.MessageLog" />
+      <Setting name="DbContext.SqlBus" />
+      <Setting name="Diagnostics.LogLevelFilter" />
+      <Setting name="Diagnostics.PerformanceCounterSampleRate" />
+      <Setting name="Diagnostics.ScheduledTransferPeriod" />
+      <Setting name="InstrumentationEnabled" />
+      <Setting name="MaintenanceMode" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+    </ConfigurationSettings>
+    <Endpoints />
+    <Certificates />
+  </WorkerRole>
+</ServiceDefinition>

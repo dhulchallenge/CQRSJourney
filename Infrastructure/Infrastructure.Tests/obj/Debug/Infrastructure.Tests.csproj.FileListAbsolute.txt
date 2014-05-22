@@ -1,0 +1,15 @@
+D:\Tesco\source\Infrastructure\Infrastructure.Tests\bin\Debug\Infrastructure.Tests.dll
+D:\Tesco\source\Infrastructure\Infrastructure.Tests\bin\Debug\Infrastructure.Tests.pdb
+D:\Tesco\source\Infrastructure\Infrastructure.Tests\bin\Debug\Infrastructure.dll
+D:\Tesco\source\Infrastructure\Infrastructure.Tests\bin\Debug\Moq.dll
+D:\Tesco\source\Infrastructure\Infrastructure.Tests\bin\Debug\xunit.dll
+D:\Tesco\source\Infrastructure\Infrastructure.Tests\bin\Debug\Newtonsoft.Json.dll
+D:\Tesco\source\Infrastructure\Infrastructure.Tests\bin\Debug\Infrastructure.pdb
+D:\Tesco\source\Infrastructure\Infrastructure.Tests\bin\Debug\Infrastructure.xml
+D:\Tesco\source\Infrastructure\Infrastructure.Tests\bin\Debug\Moq.pdb
+D:\Tesco\source\Infrastructure\Infrastructure.Tests\bin\Debug\Moq.xml
+D:\Tesco\source\Infrastructure\Infrastructure.Tests\bin\Debug\xunit.xml
+D:\Tesco\source\Infrastructure\Infrastructure.Tests\bin\Debug\Newtonsoft.Json.xml
+D:\Tesco\source\Infrastructure\Infrastructure.Tests\obj\Debug\Infrastructure.Tests.csprojResolveAssemblyReference.cache
+D:\Tesco\source\Infrastructure\Infrastructure.Tests\obj\Debug\Infrastructure.Tests.dll
+D:\Tesco\source\Infrastructure\Infrastructure.Tests\obj\Debug\Infrastructure.Tests.pdb

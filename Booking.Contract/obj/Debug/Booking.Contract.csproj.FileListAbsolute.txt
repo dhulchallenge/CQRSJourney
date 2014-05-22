@@ -1,0 +1,10 @@
+D:\Tesco\CQRSJourney\Booking.Contract\bin\Debug\Booking.Contract.dll
+D:\Tesco\CQRSJourney\Booking.Contract\bin\Debug\Booking.Contract.pdb
+D:\Tesco\CQRSJourney\Booking.Contract\bin\Debug\Infrastructure.dll
+D:\Tesco\CQRSJourney\Booking.Contract\bin\Debug\Newtonsoft.Json.dll
+D:\Tesco\CQRSJourney\Booking.Contract\bin\Debug\Infrastructure.pdb
+D:\Tesco\CQRSJourney\Booking.Contract\bin\Debug\Infrastructure.xml
+D:\Tesco\CQRSJourney\Booking.Contract\bin\Debug\Newtonsoft.Json.xml
+D:\Tesco\CQRSJourney\Booking.Contract\obj\Debug\Booking.Contract.csprojResolveAssemblyReference.cache
+D:\Tesco\CQRSJourney\Booking.Contract\obj\Debug\Booking.Contract.dll
+D:\Tesco\CQRSJourney\Booking.Contract\obj\Debug\Booking.Contract.pdb

@@ -1,0 +1,266 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Infrastructure.Sql</name>
+    </assembly>
+    <members>
+        <member name="P:Infrastructure.Sql.BlobStorage.BlobEntity.BlobString">
+            <devdoc>
+            This property is only populated by the SQL implementation 
+            if the content type of the saved blob is "text/plain".
+            </devdoc>
+        </member>
+        <member name="T:Infrastructure.Sql.BlobStorage.SqlBlobStorage">
+            <summary>
+            Simple local blob storage simulator for easy local debugging. 
+            Assumes the blobs are persisted as text through an <see cref="T:Infrastructure.Serialization.ITextSerializer"/>.
+            </summary>
+        </member>
+        <member name="T:System.Collections.Generic.DictionaryExtensions">
+            <summary>
+            Usability extensions for dictionaries.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.DictionaryExtensions.TryGetValue``2(System.Collections.Generic.IDictionary{``0,``1},``0)">
+            <summary>
+            Gets an item from the dictionary, if it's found.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.DictionaryExtensions.TryGetValue``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1)">
+            <summary>
+            Gets an item from the dictionary, if it's found. Otherwise, 
+            returns the specified default value.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Sql.MessageLog.SqlMessageLogHandler">
+            <summary>
+            The SQL version of the event log runs directly in-proc 
+            and is implemented as an event and command handler instead of a 
+            raw message listener.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Sql.EventSourcing.EventStoreDbContext">
+            <summary>
+            Used by <see cref="T:Infrastructure.Sql.EventSourcing.SqlEventSourcedRepository`1"/>, and is used only for running the sample application
+            without the dependency to the Windows Azure Service Bus when using the DebugLocal solution configuration.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Sql.Messaging.Implementation.MessagingDbInitializer">
+            <summary>
+            This database initializer is to support <see cref="T:Infrastructure.Sql.Messaging.CommandBus"/> and <see cref="T:Infrastructure.Sql.Messaging.EventBus"/>, which should be only
+            used for running the sample application without the dependency to the Windows Azure Service Bus when using the
+            DebugLocal solution configuration. It should not be used in production systems.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Util.CacheAnyEnumerableExtensions">
+            <summary>
+            Prevents double enumeration (and potential roundtrip to the data source) when checking 
+            for the presence of items in an enumeration.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Util.CacheAnyEnumerableExtensions.AsCachedAnyEnumerable``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Makes sure that calls to <see cref="M:Infrastructure.Util.CacheAnyEnumerableExtensions.IAnyEnumerable`1.Any"/> are 
+            cached, and reuses the resulting enumerator.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Util.CacheAnyEnumerableExtensions.IAnyEnumerable`1">
+            <summary>
+            Exposes a cached <see cref="M:Infrastructure.Util.CacheAnyEnumerableExtensions.IAnyEnumerable`1.Any"/> operator.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Util.CacheAnyEnumerableExtensions.AnyEnumerable`1">
+            <summary>
+            Lazily computes whether the inner enumerable has 
+            any values, and caches the result.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Infrastructure.Sql.Messaging.CommandBus">
+            <summary>
+            This is an extremely basic implementation of <see cref="T:Infrastructure.Messaging.ICommandBus"/> that is used only for running the sample
+            application without the dependency to the Windows Azure Service Bus when using the DebugLocal solution configuration.
+            It should not be used in production systems.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Sql.Messaging.CommandBus.#ctor(Infrastructure.Sql.Messaging.IMessageSender,Infrastructure.Serialization.ITextSerializer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infrastructure.Sql.Messaging.CommandBus"/> class.
+            </summary>
+            <param name="serializer">The serializer to use for the message body.</param>
+        </member>
+        <member name="M:Infrastructure.Sql.Messaging.CommandBus.Send(Infrastructure.Messaging.Envelope{Infrastructure.Messaging.ICommand})">
+            <summary>
+            Sends the specified command.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Sql.Messaging.EventBus">
+            <summary>
+            This is an extremely basic implementation of <see cref="T:Infrastructure.Messaging.IEventBus"/> that is used only for running the sample
+            application without the dependency to the Windows Azure Service Bus when using the DebugLocal solution configuration.
+            It should not be used in production systems.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Sql.Messaging.EventBus.#ctor(Infrastructure.Sql.Messaging.IMessageSender,Infrastructure.Serialization.ITextSerializer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infrastructure.Sql.Messaging.EventBus"/> class.
+            </summary>
+            <param name="serializer">The serializer to use for the message body.</param>
+        </member>
+        <member name="M:Infrastructure.Sql.Messaging.EventBus.Publish(Infrastructure.Messaging.Envelope{Infrastructure.Messaging.IEvent})">
+            <summary>
+            Sends the specified event.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Sql.Messaging.EventBus.Publish(System.Collections.Generic.IEnumerable{Infrastructure.Messaging.Envelope{Infrastructure.Messaging.IEvent}})">
+            <summary>
+            Publishes the specified events.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Sql.Messaging.Handling.CommandProcessor">
+            <summary>
+            Processes incoming commands from the bus and routes them to the appropriate 
+            handlers.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Sql.Messaging.Handling.MessageProcessor">
+            <summary>
+            Provides basic common processing code for components that handle 
+            incoming messages from a receiver.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Sql.Messaging.Handling.MessageProcessor.#ctor(Infrastructure.Sql.Messaging.IMessageReceiver,Infrastructure.Serialization.ITextSerializer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infrastructure.Sql.Messaging.Handling.MessageProcessor"/> class.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Sql.Messaging.Handling.MessageProcessor.Start">
+            <summary>
+            Starts the listener.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Sql.Messaging.Handling.MessageProcessor.Stop">
+            <summary>
+            Stops the listener.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Sql.Messaging.Handling.MessageProcessor.Dispose">
+            <summary>
+            Disposes the resources used by the processor.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Sql.Messaging.Handling.MessageProcessor.Dispose(System.Boolean)">
+            <summary>
+            Disposes the resources used by the processor.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Sql.Messaging.Handling.CommandProcessor.#ctor(Infrastructure.Sql.Messaging.IMessageReceiver,Infrastructure.Serialization.ITextSerializer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infrastructure.Sql.Messaging.Handling.CommandProcessor"/> class.
+            </summary>
+            <param name="receiver">The receiver to use. If the receiver is <see cref="T:System.IDisposable"/>, it will be disposed when the processor is 
+            disposed.</param>
+            <param name="serializer">The serializer to use for the message body.</param>
+        </member>
+        <member name="M:Infrastructure.Sql.Messaging.Handling.CommandProcessor.Register(Infrastructure.Messaging.Handling.ICommandHandler)">
+            <summary>
+            Registers the specified command handler.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Sql.Messaging.Handling.CommandProcessor.ProcessMessage(System.Object,System.String)">
+            <summary>
+            Processes the message by calling the registered handler.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Sql.Messaging.Handling.EventProcessor">
+            <summary>
+            Processes incoming events from the bus and routes them to the appropriate 
+            handlers.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Sql.Messaging.IMessageReceiver">
+            <summary>
+            Abstracts the behavior of a receiving component that raises 
+            an event for every received event.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Sql.Messaging.IMessageReceiver.Start">
+            <summary>
+            Starts the listener.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Sql.Messaging.IMessageReceiver.Stop">
+            <summary>
+            Stops the listener.
+            </summary>
+        </member>
+        <member name="E:Infrastructure.Sql.Messaging.IMessageReceiver.MessageReceived">
+            <summary>
+            Event raised whenever a message is received. Consumer of 
+            the event is responsible for disposing the message when 
+            appropriate.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Sql.Messaging.IMessageSender">
+            <summary>
+            Abstracts the behavior of sending a message.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Sql.Messaging.IMessageSender.Send(Infrastructure.Sql.Messaging.Message)">
+            <summary>
+            Sends the specified message.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Sql.Messaging.IMessageSender.Send(System.Collections.Generic.IEnumerable{Infrastructure.Sql.Messaging.Message})">
+            <summary>
+            Sends a batch of messages.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Sql.Messaging.Implementation.MessageReceiver.ReceiveMessages(System.Threading.CancellationToken)">
+            <summary>
+            Receives the messages in an endless loop.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Sql.Messaging.Implementation.MessageSender.Send(Infrastructure.Sql.Messaging.Message)">
+            <summary>
+            Sends the specified message.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Sql.Messaging.Implementation.MessageSender.Send(System.Collections.Generic.IEnumerable{Infrastructure.Sql.Messaging.Message})">
+            <summary>
+            Sends a batch of messages.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Sql.Processes.SqlProcessManagerDataContext`1">
+            <summary>
+            Data context used to persist instances of <see cref="T:Infrastructure.Processes.IProcessManager"/> (also known as Sagas in the CQRS community) using Entity Framework.
+            </summary>
+            <typeparam name="T">The entity type to persist.</typeparam>
+            <remarks>
+            <para>See <see cref="!:http://go.microsoft.com/fwlink/p/?LinkID=258564">Reference 6</see> for a description of what is a Process Manager.</para>
+            <para>This is a very basic implementation, and would benefit from several optimizations. 
+            For example, it would be very valuable to provide asynchronous APIs to avoid blocking I/O calls.
+            It would also benefit from dispatching commands asynchronously (but in a resilient way), similar to what the EventStoreBusPublisher does.
+            See <see cref="!:http://go.microsoft.com/fwlink/p/?LinkID=258557"> Journey chapter 7</see> for more potential performance and scalability optimizations.</para>
+            <para>There are a few things that we learnt along the way regarding Process Managers, which we might do differently with the new insights that we
+            now have. See <see cref="!:http://go.microsoft.com/fwlink/p/?LinkID=258558"> Journey lessons learnt</see> for more information.</para>
+            </remarks>
+        </member>
+        <member name="M:Infrastructure.Sql.Processes.SqlProcessManagerDataContext`1.Save(`0)">
+            <summary>
+            Saves the state of the process manager and publishes the commands in a resilient way.
+            </summary>
+            <param name="processManager">The instance to save.</param>
+            <remarks>For explanation of the implementation details, see <see cref="!:http://go.microsoft.com/fwlink/p/?LinkID=258557"> Journey chapter 7</see>.</remarks>
+        </member>
+        <member name="T:Infrastructure.Sql.EventSourcing.SqlEventSourcedRepository`1">
+            <summary>
+            This is an extremely basic implementation of the event store (straw man), that is used only for running the sample application
+            without the dependency to the Windows Azure Service Bus when using the DebugLocal solution configuration.
+            It does not check for event versions before committing, nor is transactional with the event bus nor resilient to connectivity errors or crashes.
+            It does not do any snapshots either for entities that implement <see cref="T:Infrastructure.EventSourcing.IMementoOriginator"/>, which would benefit the usage of SeatsAvailability.
+            </summary>
+            <typeparam name="T">The entity type to persist.</typeparam>
+        </member>
+    </members>
+</doc>
